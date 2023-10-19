@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Babylonica&family=Roboto:wght@400;700&display=swap");
 *,
 *::before,
 *::after {
@@ -258,20 +257,14 @@ template {
 }
 
 body {
-  padding: 1rem;
-  display: grid;
   place-content: center;
-  gap: 1rem;
+  padding: 1rem;
   background: radial-gradient(blue, red);
 }
 body header {
-  background-color: orangered;
-  padding: 1rem;
   justify-self: stretch;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  gap: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 body header h1 {
   line-height: 0;
@@ -280,31 +273,27 @@ body header h1 {
 }
 body main {
   position: relative;
+  isolation: isolate;
   width: 33vw;
   min-width: 343px;
-  isolation: isolate;
 }
 body main::before {
   content: "";
   position: absolute;
+  z-index: -1;
   inset: 0;
   background-color: rgba(255, 255, 255, 0.5);
-  z-index: -1;
   filter: blur(40px);
 }
 body main section.gameOver {
-  display: grid;
-  justify-items: center;
-  align-items: center;
   position: absolute;
-  border: 3px solid;
-  background-color: white;
-  width: 75%;
-  aspect-ratio: 16/9;
   left: 50%;
   transform: translate(-50%, 0);
-  transition: 0.6s;
+  width: 75%;
+  aspect-ratio: 16/9;
   opacity: 0;
+  transition: 0.6s;
+  background-color: white;
   pointer-events: none;
 }
 body main section.gameOver.visible {
@@ -323,9 +312,9 @@ body main section.game ul {
 }
 body main section.game ul li {
   aspect-ratio: 1;
-  border: 3px solid black;
   display: grid;
   place-content: center;
+  border: 3px solid black;
   font-size: max(5vw, 2rem);
   font-weight: 600;
   text-transform: uppercase;
@@ -352,7 +341,27 @@ body main section.game ul li.p1 {
 body main section.game ul li.p2 {
   color: red;
 }
+body main section.game ul li:focus-visible, body main section.game ul li:focus {
+  outline: none;
+}
+body main section.game ul li.focus {
+  animation: pulse 2s infinite;
+  outline: 3px solid white;
+  outline-offset: -20px;
+}
+@keyframes pulse {
+  50% {
+    outline: 3px solid blue;
+  }
+}
 
 button {
   padding: 0.6rem 1.2rem;
+}
+
+.grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
 }/*# sourceMappingURL=style.min.css.map */
