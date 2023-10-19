@@ -81,8 +81,9 @@ function checkGame(player,arr,boxes) {
         arr.includes("7") && arr.includes("8") && arr.includes("9") ||
         arr.includes("1") && arr.includes("4") && arr.includes("7") ||
         arr.includes("2") && arr.includes("5") && arr.includes("8") ||
+        arr.includes("3") && arr.includes("5") && arr.includes("9") ||
         arr.includes("1") && arr.includes("5") && arr.includes("9") ||
-        arr.includes("3") && arr.includes("5") && arr.includes("7") 
+        arr.includes("3") && arr.includes("5") && arr.includes("7")
 
     ){
         winner = player
