@@ -6,7 +6,7 @@ const gameOverSection = document.querySelector(".gameOver")
 let restartBtn = gameOverSection.querySelector("button")
 
 let mode = "vsc"
-let player1TURN = true
+let player1TURN = false
 let content
 let p1Order = []
 let p2Order = []
@@ -61,6 +61,48 @@ function renderGame(sign,arr,box,clas) {
     box.tabIndex = "-1"
 }
 
+function checkGame(player,arr,boxes) {
+
+    if
+    (
+        arr.includes("1") && arr.includes("2") && arr.includes("3") ||
+        arr.includes("4") && arr.includes("5") && arr.includes("6") ||
+        arr.includes("7") && arr.includes("8") && arr.includes("9") ||
+        arr.includes("1") && arr.includes("4") && arr.includes("7") ||
+        arr.includes("2") && arr.includes("5") && arr.includes("8") ||
+        arr.includes("3") && arr.includes("6") && arr.includes("9") ||
+        arr.includes("1") && arr.includes("5") && arr.includes("9") ||
+        arr.includes("3") && arr.includes("5") && arr.includes("7") 
+
+    ){
+        winner = player
+
+        if(winner === "player1") player1TURN = false
+        else player1TURN = true
+            
+        endGame()
+            console.log(`win`);
+    }
+            
+    
+    
+    else if (boxes.every(box=> box.classList.contains("p1") || box.classList.contains("p2"))) {
+
+        winner = "Draw"
+
+        if(player1TURN) player1TURN = false
+        else player1TURN = true
+
+        //todo: Burda bi ibnelik
+        // if(mode == "vsc") {
+        //     if(player1TURN) player1TURN = true
+        //     else player1TURN = false
+        // }
+        endGame()
+            console.log(`draw`);
+    }
+}
+
 function computerMove() {
     unsignedBoxes = boxes.filter(box=> !box.classList.contains("p1") && !box.classList.contains("p2"))
 
@@ -72,50 +114,7 @@ const random = Math.floor(Math.random()*unsignedBoxes.length)
     }
 }
 
-function checkGame(player,arr,boxes) {
-
-    if
-    (
-        arr.includes("1") && arr.includes("2") && arr.includes("3") ||
-        arr.includes("4") && arr.includes("5") && arr.includes("6") ||
-        arr.includes("7") && arr.includes("8") && arr.includes("9") ||
-        arr.includes("1") && arr.includes("4") && arr.includes("7") ||
-        arr.includes("2") && arr.includes("5") && arr.includes("8") ||
-        arr.includes("3") && arr.includes("5") && arr.includes("9") ||
-        arr.includes("1") && arr.includes("5") && arr.includes("9") ||
-        arr.includes("3") && arr.includes("5") && arr.includes("7")
-
-    ){
-        winner = player
-
-        if(winner === "player1") player1TURN = false
-        else player1TURN = true
-            
-        endGame()
-    }
-            
-    
-    
-    else if(boxes.every(box=> box.classList.contains("p1") || box.classList.contains("p2"))) {
-
-        winner = "Draw"
-
-        if(player1TURN) player1TURN = false
-        else player1TURN = true
-        console.log(player1TURN);
-
-        //todo: Burda bi ibnelik var
-        // if(mode == "vsc") {
-        //     if(player1TURN) player1TURN = true
-        //     else player1TURN = false
-        // }
-        endGame()
-    }
-}
-
 function endGame() {
-        p1Order = []
-        p2Order = []
 
         boxes.forEach(box=>{
             box.style.pointerEvents = "none"
@@ -132,6 +131,9 @@ function endGame() {
 }
 
     restartBtn.addEventListener("click",e=>{
+        
+        p1Order = []
+        p2Order = []
 
         gameOverSection.classList.remove("visible")
 
